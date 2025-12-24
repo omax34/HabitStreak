@@ -12,10 +12,10 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class) // Este módulo vive toda la vida de la app
+@InstallIn(SingletonComponent::class)
 object AppModule {
 
-    // 1. Enseña a Hilt cómo crear la Base de Datos
+    //Crear la Base de Datos con Hilt
     @Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
@@ -26,7 +26,7 @@ object AppModule {
         ).build()
     }
 
-    // 2. Enseña a Hilt cómo crear el DAO (sacándolo de la base de datos)
+    // Crear el DAO sacándolo de la base de datos
     @Provides
     @Singleton
     fun provideHabitDao(database: AppDatabase): HabitDao {
