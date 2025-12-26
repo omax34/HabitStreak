@@ -5,12 +5,13 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface HabitDao {
 
-    @Query("SELECT * FROM habits ORDER BY createdDate DESC")
+    @Query("SELECT * FROM habits")
     //Se creo la funcion get AllHabits que retorna una lista. Flow para que esta lista se actualize/ leer datos en tiempo real
     fun getAllHabits(): Flow<List<Habit>>
 
@@ -21,4 +22,7 @@ interface HabitDao {
 
     @Delete
     suspend fun deleteHabit(habit: Habit)
+
+    @Update
+    suspend fun updateHabit(habit: Habit)
 }

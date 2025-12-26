@@ -24,41 +24,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             HabitStreakTheme {
-                // Controlador de navegación
-                val navController = rememberNavController()
+                val habits by viewModel.habits.collectAsState()
 
-                // Mapa de navegacion
-                NavHost(
-                    navController = navController,
-                    startDestination = "home"
-                ) {
-                    //Pantalla de Inicio
-                    composable("home") {
-                        // Observamos la lista de hábitos del ViewModel
-                        // "by" convierte el Flow en una lista que se actualiza sola
-                        // viewModel.habits es un FLOW
-                        val habits by viewModel.habits.collectAsState()
-                        HomeScreen(
-                            habits = habits,
-                            onAddHabit = {
-                                // Cuando tocan el botón +, navegamos a la pantalla de agregar
-                                navController.navigate("add_habit")
-                            }
-                        )
-                    }
-
-                    //Pantalla de Agregar
-                    composable("add_habit") {
-                        AddHabitScreen(
-                            onBack = { navController.popBackStack() },
-                            onSave = { name, description ->
-                                // Guardamos el dato
-                                viewModel.addNewHabit(name, description)
-                                navController.popBackStack()
-                            }
-                        )
-                    }
-                }
+                HomeScreen(
+                    habits = habits,
+                    onAddHabit = { name -> viewModel.addNewHabit(name) },
+                    onDeleteHabit = { habit -> viewModel.deleteHabit(habit) },
+                    onCompleteHabit = { habit -> viewModel.completeHabit(habit) }
+                )
             }
         }
     }

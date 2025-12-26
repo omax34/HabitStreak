@@ -13,5 +13,6 @@ data class Habit(
     // Columnas de la tabla
     val name: String,
     val description: String = "",
-    val createdDate: Long = System.currentTimeMillis()
+    val streak: Int = 0,
+    val lastCompletedDate: Long? = null //Feccha
 )

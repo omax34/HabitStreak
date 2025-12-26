@@ -25,10 +25,31 @@ class HomeViewModel @Inject constructor(
         )
 
     // Función para agregar un hábito
-    fun addNewHabit(name: String, description: String) {
+    fun addNewHabit(name: String) {
         viewModelScope.launch {
-            val newHabit = Habit(name = name, description = description)
-            habitDao.insertHabit(newHabit)
+            habitDao.insertHabit(Habit(name = name))
         }
     }
+
+    // Borrar hábito
+    fun deleteHabit(habit: Habit) {
+        viewModelScope.launch {
+            habitDao.deleteHabit(habit)
+        }
+    }
+
+    // Logica de racha
+    fun completeHabit(habit: Habit) {
+        viewModelScope.launch {
+            val today = System.currentTimeMillis()
+            // Aumentaremos la racha y actualizamos la fecha.
+            val updatedHabit = habit.copy(
+                streak = habit.streak + 1,
+                lastCompletedDate = today
+            )
+            habitDao.updateHabit(updatedHabit)
+        }
+    }
+
+
 }
