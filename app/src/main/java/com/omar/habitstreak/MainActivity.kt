@@ -9,7 +9,6 @@ import androidx.compose.runtime.getValue
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.omar.habitstreak.ui.screens.AddHabitScreen
 import com.omar.habitstreak.ui.screens.HomeScreen
 import com.omar.habitstreak.ui.theme.HabitStreakTheme
 import com.omar.habitstreak.ui.viewmodel.HomeViewModel
