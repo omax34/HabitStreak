@@ -24,10 +24,10 @@ class HomeViewModel @Inject constructor(
             initialValue = emptyList()
         )
 
-    // Función para agregar un hábito de prueba
-    fun addTestHabit() {
+    // Función para agregar un hábito
+    fun addNewHabit(name: String, description: String) {
         viewModelScope.launch {
-            val newHabit = Habit(name = "Beber Agua", description = "2 Litros al día")
+            val newHabit = Habit(name = name, description = description)
             habitDao.insertHabit(newHabit)
         }
     }
